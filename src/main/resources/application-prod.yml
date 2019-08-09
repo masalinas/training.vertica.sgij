@@ -1,0 +1,35 @@
+---
+info:
+  app:
+    description: Vertica Training SGIJ Production Service
+    name: training.vertica.sgij
+    version: 0.0.1-SNAPSHOT
+    
+management:            
+  endpoints:
+    enabled-by-default: false
+
+server:
+  port: 3000
+          
+spring:
+  datasource:
+    driverClassName: com.vertica.jdbc.Driver
+    url: jdbc:vertica://192.168.1.40:5433/VMart?loginTimeout=35
+    username: dbadmin
+    password: password
+  jpa:  
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.VerticaDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+      javax:
+        persistence:
+          schema-generation:
+            create-source: metadata
+            scripts:
+              action: create
+              create-target: create.sql          
+    show-sql: true
